@@ -1,4 +1,3 @@
-![Conduit](logo.png)
 
 # Conduit node
 
