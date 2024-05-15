@@ -8,80 +8,105 @@
 Cấu hình khuyến nghị:
 - Ram 16 GB
 - CPU 4 Core
-- Ổ cứng SSD 200 GB
+- Ổ cứng SSD 1T
   
-Cấu hình tối thiểu có thể chạy:
-- Ram 8 GB
-- CPU 4 core
-- Ổ cứng SSD 160 GB
+Cấu hình tối thiểu:
+- Ram 4 GB
+- CPU 8 core
+- Ổ cứng SSD 400 GB
 
 - Hệ điều hành linux Ubintu 20.04 trở lên
 
 ### Code chạy
 
-1. Chạy lệnh Update
+1. Update
 
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
-2. Cài đặt thư viện
+2. Cài đặt
 ```
-sudo apt install curl build-essential git screen jq pkg-config libssl-dev libclang-dev ca-certificates gnupg lsb-release -y
-```
-
-2. Cài đặt docker
-
-```
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpgchmod a+r /etc/apt/keyrings/docker.gpg
+sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip -y
 ```
 
-3/
+2. coppy paste
 
 ```
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+cd $HOME
+VER="1.21.3"
+wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
+rm "go$VER.linux-amd64.tar.gz"
+[ ! -f ~/.bash_profile ] && touch ~/.bash_profile
+echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+source $HOME/.bash_profile
+[ ! -d ~/go/bin ] && mkdir -p ~/go/bin
+```
+
+3/ Coppy từng lệnh 
+
+```
+git clone https://github.com/initia-labs/initia
+cd initia
+git checkout v0.2.11
+make build
 ```
 4/
 
 ```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose -y
+mkdir -p $HOME/.initia/cosmovisor/genesis/bin
+mv /root/initia/build/initiad $HOME/.initia/cosmovisor/genesis/bin/
 ```
 
 5/
 
 ```
-git clone https://github.com/conduitxyz/node.gitclone https://github.com/conduitxyz/node.git
+sudo ln -s $HOME/.initia/cosmovisor/genesis $HOME/.initia/cosmovisor/current -f
+sudo ln -s $HOME/.initia/cosmovisor/current/bin/initiad /usr/local/bin/initiad -f
 ```
 
 6/
 
 ```
-cd node
-./download-config.py zora-mainnet-0
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 ```
 
 7/
 
 ```
-export CONDUIT_NETWORK=zora-mainnet-0
-cp .env.example .env
-nano .env
+sudo tee /etc/systemd/system/initiad.service > /dev/null << EOF
+[Unit]
+Description=initia node service
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which cosmovisor) run start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.initia"
+Environment="DAEMON_NAME=initiad"
+Environment="UNSAFE_SKIP_BACKUP=true"
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.initia/cosmovisor/current/bin"
+
+[Install]
+WantedBy=multi-user.target
+EOF
 ```
 
 8/ 
-**Chỗ này đặt khóa Alchemy API vào
-OP_NODE_L1_ETH_RPC=http://khoa_Alchemy_API
+```
+sudo systemctl daemon-reload
+sudo systemctl enable initiad.service
+```
 
 9/bắt đầu chạy
 
 ```
-screen -S loglog
-docker compose up --build--build
+sudo systemctl daemon-reload
+sudo systemctl enable initiad.service
 ```
 
