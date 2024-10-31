@@ -23,11 +23,6 @@
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
-2. Cài đặt thư viện
-```
-sudo apt install curl build-essential git screen jq pkg-config libssl-dev libclang-dev ca-certificates gnupg lsb-release -y
-```
-
 2. Cài đặt docker
 
 ```
