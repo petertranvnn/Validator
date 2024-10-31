@@ -1,6 +1,6 @@
 
 ### Thông tin
-- CHuẩn bị: ảnh lòng bàn tay, ảnh selfie, Ví Nillion (Keplr, leap)
+- Chuẩn bị: ảnh lòng bàn tay, ảnh selfie, Ví Nillion (Keplr, leap)
 - Link: https://verifier.nillion.com/verifier
 - Faucet: https://faucet.testnet.nillion.com/
 
@@ -13,7 +13,7 @@
 - CPU 2 Core
 - Ram 4 GB
 - Ổ cứng SSD 40 GB
-- Hệ điều hành linux Ubintu 22.04 trở lên
+- Hệ điều hành linux Ubuntu 22.04 trở lên
 
 ### Code chạy
 
