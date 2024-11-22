@@ -42,18 +42,11 @@ nano config.yaml
 
   6. Start Node
 ```
-screen -S glacier-node
 
 chmod +x verifier_linux_amd64
 
 ./verifier_linux_amd64
 ```
-7. Check log
-   
-```
-screen -R glacier-node
-```
-
 
 
 
