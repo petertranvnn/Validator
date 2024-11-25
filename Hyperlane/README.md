@@ -53,15 +53,11 @@ npm install -g @hyperlane-xyz/cli
 ```
 docker pull --platform linux/amd64 gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0
 ```
-8. Cài đặt Hyperlane Client
-```
-npm install -g @hyperlane-xyz/cli
-```
-9. Tạo thư mục node database
+8. Tạo thư mục node database
 ```
 mkdir -p /root/hyperlane_db_base && chmod -R 777 /root/hyperlane_db_base
 ```
-10. cấu hình Hyperlane validator
+9. cấu hình Hyperlane validator
 ```
 docker run -d \
   -it \
@@ -90,7 +86,7 @@ cast wallet new
 ```
 - Sau khi tạo ví xong thì coppy Private key import vào metamask để sử dụng
 
-11. Check log
+10. Check log
 ```
 docker logs -f hyperlane
 ```
