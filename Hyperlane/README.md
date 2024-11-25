@@ -1,13 +1,11 @@
 
 ### Thông tin
-- Chuẩn bị: Ví metamask, BNB testnet trên OpBNB testnet
-- Faucet BNB: https://www.bnbchain.org/en/testnet-faucet
-- Brigde BNB testnet từ BNB sang OpBNB: https://opbnb-testnet-bridge.bnbchain.org
-- Check Node status: https://testnet.nodes.glacier.io/status
-- https://testnet.opbnbscan.com/
+- Chuẩn bị: 0.5$ ETH trên Base mainnet
+- Tạo URL RPC tạo: https://alchemy.com hoặc Quicknode
+
 
 ### Cấu hình tối thiểu
-- CPU 1 Core
+- CPU 2 Core
 - Ram 2 GB
 - Ổ cứng SSD 20 GB
 - Hệ điều hành linux Ubuntu 22.04 trở lên
@@ -20,34 +18,78 @@
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
-2.
+2. Cài Docker
+```
+sudo apt-get install docker.io -y
+```
+3. Cài đặt Nodejs
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+```
+4. Cài đặt nvm
+```
+nvm install 20
+```
+5. Cài đặt Foundry
+```
+curl -L https://foundry.paradigm.xyz | bash
+```
+```
+source /root/.bashrc
+```
+```
+foundryup
+```
+6. Cài đặt Hyperlane Client
+```
+npm install -g @hyperlane-xyz/cli
+```
+7. Clone source Hyperlane từ github repo
+```
+docker pull --platform linux/amd64 gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0
+```
+8. Cài đặt Hyperlane Client
+```
+npm install -g @hyperlane-xyz/cli
+```
+9. Tạo thư mục node database
+```
+mkdir -p /root/hyperlane_db_base && chmod -R 777 /root/hyperlane_db_base
+```
+10. cấu hình Hyperlane validator
+```
+docker run -d \
+  -it \
+  --name hyperlane \
+  --mount type=bind,source=/root/hyperlane_db_base,target=/hyperlane_db_base \
+  gcr.io/abacus-labs-dev/hyperlane-agent:agents-v1.0.0 \
+  ./validator \
+  --db /hyperlane_db_base \
+  --originChainName base \
+  --reorgPeriod 1 \
+  --validator.id Petertran \
+  --checkpointSyncer.type localStorage \
+  --checkpointSyncer.folder base \
+  --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
+  --validator.key <PRIVATE_KEY> \
+  --chains.base.signer.key <PRIVATE_KEY> \
+  --chains.base.customRpcUrls <RPC_URL>
+```
+(***) NOTE:
+- Chỗ Privatekey anh em có thể import ví đã tạo sẵn hoặc có thể tạo ví mới.
+- Tạo ví mới bằng dòng code sau:
+```
+cast wallet new
+```
+- Sau khi tạo ví xong thì coppy Private key import vào metamask để sử dụng
 
+11. Check log
 ```
-wget https://github.com/Glacier-Labs/node-bootstrap/releases/download/v0.0.1-beta/verifier_linux_amd64
+docker logs -f hyperlane
 ```
-3.
-```
-wget https://glacier-labs.github.io/node-bootstrap/config.yaml
-```
-4. mở nano
-```
-nano config.yaml
-```
-5. Edit nano
-- Thay Private key ví trong “YourPrivateKey” bằng private ví của các bạn
-- Sau đó nhấn tôt hợp phím
-- Control+x
-- Y
-- Enter
-
-  6. Start Node
-```
-
-chmod +x verifier_linux_amd64
-
-./verifier_linux_amd64
-```
-
-
-
 
