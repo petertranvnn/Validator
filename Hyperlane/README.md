@@ -81,7 +81,7 @@ docker run -d \
   --chains.base.customRpcUrls <RPC_URL>
 ```
 (***) NOTE:
-- Thay <Name> bằng Tên của các bạn (chỗ này là validator name)
+- Thay <NAME> bằng Tên của các bạn (chỗ này là validator name)
 - Thay <PRIVATE_KEY> bằng Private key ví của các bạn
 - Chỗ Privatekey anh em có thể import ví đã tạo sẵn hoặc có thể tạo ví mới.
 - Tạo ví mới bằng dòng code sau:
