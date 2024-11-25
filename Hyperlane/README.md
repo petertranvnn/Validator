@@ -72,7 +72,7 @@ docker run -d \
   --db /hyperlane_db_base \
   --originChainName base \
   --reorgPeriod 1 \
-  --validator.id Petertran \
+  --validator.id <Name> \
   --checkpointSyncer.type localStorage \
   --checkpointSyncer.folder base \
   --checkpointSyncer.path /hyperlane_db_base/base_checkpoints \
@@ -81,6 +81,8 @@ docker run -d \
   --chains.base.customRpcUrls <RPC_URL>
 ```
 (***) NOTE:
+- Thay <Name> bằng Tên của các bạn (chỗ này là validator name)
+- Thay <PRIVATE_KEY> bằng Private key ví của các bạn
 - Chỗ Privatekey anh em có thể import ví đã tạo sẵn hoặc có thể tạo ví mới.
 - Tạo ví mới bằng dòng code sau:
 ```
