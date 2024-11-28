@@ -23,7 +23,8 @@ sudo apt-get update && sudo apt-get upgrade -y
 2.
 
 ```
-wget https://github.com/Glacier-Labs/node-bootstrap/releases/download/v0.0.1-beta/verifier_linux_amd64
+apt install screen
+wget https://github.com/Glacier-Labs/node-bootstrap/releases/download/v0.0.2-beta/verifier_linux_amd64
 ```
 3.
 ```
@@ -40,13 +41,19 @@ nano config.yaml
 - Y
 - Enter
 
-  6. Start Node
+6. Start Node
+   
 ```
+screen -S glacier-node
 
 chmod +x verifier_linux_amd64
 
 ./verifier_linux_amd64
 ```
+7. Check log
+   
+```
+screen -R glacier-node
 
-
+```
 
