@@ -56,4 +56,11 @@ chmod +x verifier_linux_amd64
 screen -R glacier-node
 
 ```
+---------------------------------------------------------------------------------------
+Update V0.03
+```
+docker run -d -e PRIVATE_KEY="YOUR_PRIVATE_KEY" --name glacier-verifier docker.io/glaciernetwork/glacier-verifier:v0.0.3
+```
+
+- sửa PRIVATE_KEY="YOUR_PRIVATE_KEY bằng Private ví bạn đang chạy
 
