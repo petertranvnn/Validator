@@ -26,15 +26,17 @@ sudo apt-get install docker.io -y
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
-```
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-```
+
 4. Cài đặt nvm
+
+```
+sudo apt-get update
+```
 ```
 nvm install 20
 ```
+Note: lỗi thì reboot VPS lại ( sudo reboot now)
+
 5. Cài đặt Foundry
 ```
 curl -L https://foundry.paradigm.xyz | bash
