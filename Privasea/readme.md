@@ -41,7 +41,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io -y
 ```
 
 ```
-sudo docker run hello-world
+sudo docker --version
 ```
 
 3. Pull docker mirroring
