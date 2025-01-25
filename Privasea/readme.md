@@ -19,6 +19,10 @@ https://faucet.quicknode.com/arbitrum/sepolia
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
+```
+sudo apt -qy install curl git jq lz4 build-essential
+```
+
 2. Cài Docker
 
 ```
@@ -30,15 +34,11 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 ```
 
 ```
-sudo apt-get install docker.io -y
+sudo apt-get update
 ```
 
 ```
-sudo apt update
-```
-
-```
-sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
 ```
