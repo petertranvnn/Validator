@@ -44,6 +44,15 @@ sudo apt install docker-ce docker-ce-cli containerd.io -y
 sudo docker --version
 ```
 
+```
+sudo systemctl start docker
+```
+
+```
+sudo systemctl enable docker
+```
+
+
 3. Pull docker mirroring
 ```
 docker pull privasea/acceleration-node-beta:latest
