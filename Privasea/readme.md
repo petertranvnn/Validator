@@ -56,7 +56,7 @@ sudo systemctl enable docker
 
 3. Pull docker mirroring
 ```
-docker pull privasea/acceleration-node-beta:latest
+sudo docker pull privasea/acceleration-node-beta
 ```
 
 4. Tạo thư mục privasea
@@ -73,7 +73,7 @@ docker run --rm -it -v "$HOME/privasea/config:/app/config" privasea/acceleration
 
 6. Chuyển keystore vào thư mục privasea
 ```
-mv $HOME/privasea/config/UTC--* $HOME/privasea/config/wallet_keystore
+mv $HOME/privasea/config/<Thay thế từ UTC--xxxxxxxxxx> $HOME/privasea/config/wallet_keystore
 ```
 
 7.
